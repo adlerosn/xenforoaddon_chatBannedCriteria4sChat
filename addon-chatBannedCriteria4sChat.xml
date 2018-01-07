@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="chatBannedCriteria4sChat" title="[kiror][Chat by Siropu] Chat banned as criteria" version_string="0.0" version_id="0" url="https://github.com/adlerosn/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications>
+    <modification template="helper_criteria_user" modification_key="addchatmodcriteriakickbanmute" description="Add chat moderation criteria: kick, ban and mute" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<!-- slot: banned -->]]></find>
+      <replace><![CDATA[$0
+
+<li><label>
+<input type="checkbox" name="user_criteria[has_chat_mute][rule]" value="has_chat_mute" {xen:checked $userCriteria.has_chat_mute} />
+{xen:phrase siropu_chat_has_chat_mute}</label></li>
+
+<li><label>
+<input type="checkbox" name="user_criteria[has_chat_kick][rule]" value="has_chat_kick" {xen:checked $userCriteria.has_chat_kick} />
+{xen:phrase siropu_chat_has_chat_kick}</label></li>
+
+<li><label>
+<input type="checkbox" name="user_criteria[has_chat_ban][rule]" value="has_chat_ban" {xen:checked $userCriteria.has_chat_ban} />
+{xen:phrase siropu_chat_has_chat_ban}</label></li>
+
+<li><label>
+<input type="checkbox" name="user_criteria[has_chat_ban_kick][rule]" value="has_chat_ban_kick" {xen:checked $userCriteria.has_chat_ban_kick} />
+{xen:phrase siropu_chat_has_chat_ban_kick}</label></li>]]></replace>
+    </modification>
+  </admin_template_modifications>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="criteria_user" execute_order="10" callback_class="chatBannedCriteria4sChat_CriteriaUserEvent" callback_method="hasChatBan" active="1" hint="has_chat_ban" description="User has chat ban?"/>
+    <listener event_id="criteria_user" execute_order="10" callback_class="chatBannedCriteria4sChat_CriteriaUserEvent" callback_method="hasChatKick" active="1" hint="has_chat_kick" description="User has chat kick?"/>
+    <listener event_id="criteria_user" execute_order="10" callback_class="chatBannedCriteria4sChat_CriteriaUserEvent" callback_method="hasChatMute" active="1" hint="has_chat_mute" description="User has chat mute?"/>
+    <listener event_id="criteria_user" execute_order="10" callback_class="chatBannedCriteria4sChat_CriteriaUserEvent" callback_method="hasChatBanOrKick" active="1" hint="has_chat_ban_kick" description="User has chat ban or kick?"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="siropu_chat_has_chat_ban" version_id="0" version_string="0.0"><![CDATA[User is banned from chat]]></phrase>
+    <phrase title="siropu_chat_has_chat_ban_kick" version_id="0" version_string="0.0"><![CDATA[User is banned or was kicked from chat]]></phrase>
+    <phrase title="siropu_chat_has_chat_kick" version_id="0" version_string="0.0"><![CDATA[User was kicked from chat]]></phrase>
+    <phrase title="siropu_chat_has_chat_mute" version_id="0" version_string="0.0"><![CDATA[User is muted in chat]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
